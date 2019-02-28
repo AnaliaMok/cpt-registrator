@@ -20,6 +20,7 @@ namespace CPT_Registrator;
  * Version:           0.1.0
  * Author:            Analia Mok
  * Author URI:        https://analiamok.netlify.com
+ * Requires PHP: 	  7.0
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       cpt-registrator
