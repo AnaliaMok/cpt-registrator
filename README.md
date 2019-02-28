@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.com/AnaliaMok/cpt-registrator.svg?branch=master)](https://travis-ci.com/AnaliaMok/cpt-registrator)
+[![Build Status](https://travis-ci.com/AnaliaMok/cpt-registrator.svg?branch=master)](https://travis-ci.com/AnaliaMok/cpt-registrator)
 
 ## Goals:
 
