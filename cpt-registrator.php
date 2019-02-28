@@ -1,4 +1,5 @@
 <?php
+
 namespace CPT_Registrator;
 
 /**
@@ -10,13 +11,13 @@ namespace CPT_Registrator;
  * that starts the plugin.
  *
  * @link              http://example.com
- * @since             1.0.0
+ * @since             0.1.0
  * @package           CPT_Registrator
  *
  * @wordpress-plugin
  * Plugin Name:       CPT Registrator
  * Description:       Plugin framework for auto-registering and defining custom post types.
- * Version:           1.0.0
+ * Version:           0.1.0
  * Author:            Analia Mok
  * Author URI:        https://analiamok.netlify.com
  * License:           GPL-2.0+
@@ -55,23 +56,23 @@ function deactivate_cpt_registrator() {
 	CPTRegistrator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_cpt_registrator' );
-register_deactivation_hook( __FILE__, 'deactivate_cpt_registrator' );
+register_activation_hook( __FILE__, __NAMESPACE__ . '\\activate_cpt_registrator' );
+register_deactivation_hook( __FILE__, __NAMESPACE__ . '\\deactivate_cpt_registrator' );
 
 /**
  * The core plugin classes.
  */
 
-require plugin_dir_path( __FILE__ ) . 'helpers/class-dashicons.php';
-require plugin_dir_path( __FILE__ ) . 'class-cpt.php';
-require plugin_dir_path( __FILE__ ) . 'class-cptregistrator.php';
+require_once plugin_dir_path( __FILE__ ) . 'helpers/class-dashicons.php';
+require_once plugin_dir_path( __FILE__ ) . 'class-cpt.php';
+require_once plugin_dir_path( __FILE__ ) . 'class-cptregistrator.php';
 
 /**
  * Begins execution of the plugin.
  *
  * @since    1.0.0
  */
-function run_cpt_registrator() {
-	add_action( 'init', '\CPT_Registrator\CPTRegistrator::register_cpts', 0);
-}
-run_cpt_registrator();
+// function run_cpt_registrator() {
+// 	add_action( 'init', '\CPT_Registrator\CPTRegistrator::register_cpts', 0);
+// }
+// run_cpt_registrator();
