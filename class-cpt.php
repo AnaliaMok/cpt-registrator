@@ -93,7 +93,7 @@ class CPT {
 		self::$instance    = new CPT();
 		self::$name        = $name;
 		self::$description = $description;
-		self::setLabels();
+		self::$instance->set_labels();
 		return self::$instance;
 	}
 
@@ -120,7 +120,7 @@ class CPT {
 	 * @return void
 	 */
 	private function set_labels() {
-		// phpcs: disable WordPress.WP.I18n.NonSingularStringLiteralText
+		// phpcs:disable
 		self::$labels = array(
 			'name'                  => _x( self::$name, 'Post Type General Name', self::$text_domain ),
 			'singular_name'         => _x( self::$name, 'Post Type Singular Name', self::$text_domain ),
@@ -149,7 +149,7 @@ class CPT {
 			'items_list_navigation' => __( 'Items list navigation', self::$text_domain ),
 			'filter_items_list'     => __( 'Filter ' . self::$name . ' list', self::$text_domain ),
 		);
-		// phpcs: enable
+		// phpcs:enable
 	}
 
 	/**
@@ -158,12 +158,12 @@ class CPT {
 	 * Sets base arguments for defining a custom post type.
 	 *
 	 * @param string $dashicon [Default="dashicons-admin-post"].
-	 * @param array  $customArgs [Default="array"] for overriding arguments defined in default.
+	 * @param array  $custom_args [Default="array"] for overriding arguments defined in default.
 	 * @return CPT singleton instance.
 	 */
-	public function set_args( $dashicon = 'dashicons-admin-post', $customArgs = array() ) {
-		// phpcs: disable
-		$newArgs = array(
+	public function set_args( $dashicon = 'dashicons-admin-post', $custom_args = array() ) {
+		// phpcs:disable
+		$new_args = array(
 			'label'               => __( self::$name, self::$text_domain ),
 			'labels'              => self::$labels,
 			'hierarchical'        => false, // FUTURE TODO: Dynamically set.
@@ -180,17 +180,18 @@ class CPT {
 			'capability_type'     => 'post',
 			'supports'            => array( 'title', 'editor' ),
 		);
-		// phpcs: enable
+		// phpcs:enable
+		self::$args = array_replace( self::$args, $new_args );
 
-		self::$args = array_replace( self::$args, $newArgs );
-
-		if ( ! empty( $customArgs ) ) {
-			self::$args = array_replace( self::$args, $customArgs );
+		if ( ! empty( $custom_args ) ) {
+			self::$args = array_replace( self::$args, $custom_args );
 		}
 
 		// Set Customizable values.
 		if ( ! empty( self::$description ) ) {
+			// phpcs:disable
 			self::$args['description'] = __( self::$description, self::$text_domain );
+			// phpcs:enable
 		}
 
 		return $this;
@@ -235,7 +236,7 @@ class CPT {
 
 		// Register Custom Post Type.
 		register_post_type( $cpt_qualified_name, self::$args );
-		return self;
+		return $this;
 	}
 
 }

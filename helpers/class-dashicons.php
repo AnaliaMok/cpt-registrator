@@ -10,6 +10,15 @@
 
 namespace CPT_Registrator\Helpers;
 
+/**
+ * Dashicon helper class.
+ *
+ * This is a base class for creating and registering a new custom post type.
+ *
+ * @since      1.0.0
+ * @package    CPT_Registrator
+ * @author     Analia Mok
+ */
 class Dashicons {
 	// phpcs:disable
 	public static $admin_appearance        = 'dashicons-admin-appearance';
