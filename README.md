@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.com/AnaliaMok/cpt-registrator.svg?branch=master)](https://travis-ci.com/AnaliaMok/cpt-registrator)
 
+# CPT Registrator
+
+A framework geared towards the more programmatic WordPress developer. The main purpose of the framework is to help eliminate the need to copy and paste code from online generators and to eliminate repeated code in general. 
+
 ## Goals:
 
 1. Create a simple "framework" for auto-registering CPTs in Wordpress without having to remember a `require_once` statement in either your `functions.php` file or some "single source of truth" type file.
