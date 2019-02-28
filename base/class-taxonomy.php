@@ -85,6 +85,7 @@ class Taxonomy {
         self::$instance = new Taxonomy();
         self::$name     = $name;
         self::$instance->set_labels();
+        return self::$instance;
     }
 
     /**
@@ -133,5 +134,38 @@ class Taxonomy {
             'items_list_navigation'      => __( self::$name . 's list navigation', self::$text_domain ),
         );
         // phpcs:enable
+    }
+
+    public function set_args( $custom_arg = array() ) {
+        $new_args = array(
+            'labels'                     => self::$labels,
+            'hierarchical'               => false,
+            'public'                     => true,
+            'show_ui'                    => true,
+            'show_admin_column'          => true,
+            'show_in_nav_menus'          => true,
+            'show_tagcloud'              => false,
+        );
+
+        return $this;
+    }
+
+    public function set_rewrite() {
+        // TODO
+        return $this;
+    }
+
+    public function register( $post_types = array() ) {
+        // Sanitize given label name.
+		$tax_qualified_name = strtolower( self::$name );
+		$tax_qualified_name = str_replace( ' ', '_', $tax_qualified_name );
+
+		// Apply any prefixes.
+		if ( ! empty( self::$prefix ) ) {
+			$tax_qualified_name = self::$prefix . $tax_qualified_name;
+        }
+
+        register_taxonomy( $tax_qualified_name, $post_types, self::$args );
+        return $this;
     }
 }
