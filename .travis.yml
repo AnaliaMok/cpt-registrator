@@ -14,13 +14,15 @@ matrix:
   include:
     - env: WP_TRAVISCI=phpcs
 
-install:
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer global require wp-coding-standards/wpcs
-  - $HOME/.composer/vendor/bin/phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+before_install:
+  # Install PHP CodeSniffer.
+  - composer self-update
+  - composer require wp-coding-standards/wpcs
+  - composer install
+  - vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs
 
 script:
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      $HOME/.composer/vendor/bin/phpcs . --standard=Wordpress
+      vendor/bin/phpcs . --standard=Wordpress
     fi
