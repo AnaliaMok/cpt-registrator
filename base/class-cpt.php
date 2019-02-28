@@ -5,6 +5,7 @@
  * @since      1.0.0
  *
  * @package    CPT_Registrator
+ * @subpackage Base
  */
 
 namespace CPT_Registrator\Base;
@@ -16,6 +17,7 @@ namespace CPT_Registrator\Base;
  *
  * @since      1.0.0
  * @package    CPT_Registrator
+ * @subpackage Base
  * @author     Analia Mok
  */
 class CPT {
