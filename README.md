@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.com/AnaliaMok/cpt-registrator.svg?branch=master)](https://travis-ci.com/AnaliaMok/cpt-registrator)
+
 ## Goals:
 
 1. Create a simple "framework" for auto-registering CPTs in Wordpress without having to remember a `require_once` statement in either your `functions.php` file or some "single source of truth" type file.
