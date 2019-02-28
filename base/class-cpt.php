@@ -11,7 +11,7 @@
 namespace CPT_Registrator\Base;
 
 /**
- * The Base Custom Post Type class.
+ * Base Custom Post Type class.
  *
  * This is a base class for creating and registering a new custom post type.
  *
@@ -117,7 +117,7 @@ class CPT {
 	/**
 	 * Sets CPT Labels.
 	 *
-	 * Sets all labels use in admin dashboard.
+	 * Sets all labels used in admin dashboard.
 	 *
 	 * @return void
 	 */
@@ -227,7 +227,7 @@ class CPT {
 	 * @return CPT   singleton instance.
 	 */
 	public function register() {
-		// Sanitize give label name.
+		// Sanitize given label name.
 		$cpt_qualified_name = strtolower( self::$name );
 		$cpt_qualified_name = str_replace( ' ', '_', $cpt_qualified_name );
 

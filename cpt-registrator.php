@@ -65,4 +65,5 @@ register_deactivation_hook( __FILE__, __NAMESPACE__ . '\\deactivate_cpt_registra
 
 require_once plugin_dir_path( __FILE__ ) . 'helpers/class-dashicons.php';
 require_once plugin_dir_path( __FILE__ ) . 'base/class-cpt.php';
+require_once plugin_dir_path( __FILE__ ) . 'base/class-taxonomy.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-cptregistrator.php';
