@@ -1,7 +1,4 @@
 <?php
-
-namespace CPT_Registrator;
-
 /**
  * The plugin bootstrap file
  *
@@ -20,12 +17,14 @@ namespace CPT_Registrator;
  * Version:           0.1.0
  * Author:            Analia Mok
  * Author URI:        https://analiamok.netlify.com
- * Requires PHP: 	  7.0
+ * Requires PHP:      7.0
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       cpt-registrator
  * Domain Path:       /languages
  */
+
+namespace CPT_Registrator;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -67,13 +66,3 @@ register_deactivation_hook( __FILE__, __NAMESPACE__ . '\\deactivate_cpt_registra
 require_once plugin_dir_path( __FILE__ ) . 'helpers/class-dashicons.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-cpt.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-cptregistrator.php';
-
-/**
- * Begins execution of the plugin.
- *
- * @since    1.0.0
- */
-// function run_cpt_registrator() {
-// 	add_action( 'init', '\CPT_Registrator\CPTRegistrator::register_cpts', 0);
-// }
-// run_cpt_registrator();
