@@ -199,7 +199,14 @@ class Taxonomy {
 			$tax_qualified_name = self::$prefix . $tax_qualified_name;
 		}
 
-        register_taxonomy( $tax_qualified_name, $post_types, self::$args );
+		// Initial Registration.
+		register_taxonomy( $tax_qualified_name, $post_types, self::$args );
+
+		// Safety Calls.
+		foreach ( $post_types as $pt ) {
+			register_taxonomy_for_object_type( $tax_qualified_name, $pt );
+		}
+
         return $this;
     }
 }
