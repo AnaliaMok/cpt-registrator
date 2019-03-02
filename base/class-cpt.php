@@ -226,16 +226,22 @@ class CPT {
 	 * @param String $slug Proper slug to use for this post type.
 	 * @return CPT   singleton instance.
 	 */
-	public function set_rewrite( $slug ) {
-		$rewrite = array(
-			'slug'       => ! empty( $slug ) ? $slug : strtolower( self::$name ),
-			'with_front' => false,
+	public function set_rewrite( $rewrite_args = array() ) {
+		// Slugify name.
+		$slug = str_replace( ' ', '-', strtolower( self::$name ) );
+
+		// Using Wordpress Defaults.
+        $rewrite = array(
+			'slug'			=> $slug,
+			'with_front'	=> true,
+			'hierarchical'  => false,
+			'ep_mask'		=> EP_NONE,
 		);
 
-		self::$args['rewrite'] = $rewrite;
+		self::$args['rewrite'] = array_replace( $rewrite, $rewrite_args );
 
-		return $this;
-	}
+        return $this;
+    }
 
 	/**
 	 * Register post type with WordPress.

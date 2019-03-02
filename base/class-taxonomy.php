@@ -155,6 +155,12 @@ class Taxonomy {
         // phpcs:enable
     }
 
+	/**
+	 * Set taxonomy arguments.
+	 *
+	 * @param array $custom_args
+	 * @return Taxonomy Current instance.
+	 */
     public function set_args( $custom_args = array() ) {
         $new_args = array(
             'labels'                     => self::$labels,
@@ -175,8 +181,21 @@ class Taxonomy {
         return $this;
     }
 
-    public function set_rewrite() {
-        // TODO
+    public function set_rewrite( $rewrite_args = array() ) {
+
+		// Slugify name.
+		$slug = str_replace( ' ', '-', strtolower( self::$name ) );
+
+		// Using Wordpress Defaults.
+        $rewrite = array(
+			'slug'			=> $slug,
+			'with_front'	=> true,
+			'hierarchical'  => false,
+			'ep_mask'		=> EP_NONE,
+		);
+
+		self::$args['rewrite'] = array_replace( $rewrite, $rewrite_args );
+
         return $this;
     }
 
