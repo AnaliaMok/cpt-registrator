@@ -37,6 +37,13 @@ class CPT {
 	private static $name;
 
 	/**
+	 * WordPress compatible post type key to use instead of the name.
+	 *
+	 * @var string
+	 */
+	private static $post_key = '';
+
+	/**
 	 * Text Domain.
 	 *
 	 * @var String
@@ -79,6 +86,7 @@ class CPT {
 	public function __construct() {
 		self::$name        = '';
 		self::$description = '';
+		self::$post_key    = '';
 		self::$args        = array();
 	}
 
@@ -112,6 +120,17 @@ class CPT {
 
 		self::$prefix = $sanitized_prefix;
 		return self::$instance;
+	}
+
+	/**
+	 * Set a post key different from the name.
+	 *
+	 * @param string $post_key
+	 * @return Taxonomy The current instance.
+	 */
+	public function set_post_key( string $post_key ) {
+		self::$post_key = $post_key;
+		return $this;
 	}
 
 	/**
@@ -227,13 +246,19 @@ class CPT {
 	 * @return CPT   singleton instance.
 	 */
 	public function register() {
-		// Sanitize given label name.
-		$cpt_qualified_name = strtolower( self::$name );
-		$cpt_qualified_name = str_replace( ' ', '_', $cpt_qualified_name );
+		$cpt_qualified_name = '';
 
-		// Apply any prefixes.
-		if ( ! empty( self::$prefix ) ) {
-			$cpt_qualified_name = self::$prefix . $cpt_qualified_name;
+		if( ! empty( self::$post_key ) ) {
+			$cpt_qualified_name = self::$post_key;
+		} else {
+			// Sanitize given label name.
+			$cpt_qualified_name = strtolower( self::$name );
+			$cpt_qualified_name = str_replace( ' ', '_', $cpt_qualified_name );
+
+			// Apply any prefixes.
+			if ( ! empty( self::$prefix ) ) {
+				$cpt_qualified_name = self::$prefix . $cpt_qualified_name;
+			}
 		}
 
 		// Register Custom Post Type.
