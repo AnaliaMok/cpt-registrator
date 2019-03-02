@@ -72,7 +72,7 @@ class Taxonomy {
 	/**
 	 * Constructor
 	 *
-	 * Primarily for resetting static members before creating a new custom post type.
+	 * Primarily for resetting static members before creating a new taxonomy.
 	 */
 	public function __construct() {
 		self::$name     = '';
@@ -87,7 +87,7 @@ class Taxonomy {
 	 *
 	 * @param String $name Post type name.
 	 * @param String $description [Default=''].
-	 * @return CPT  singleton instance for method chaining.
+	 * @return Taxonomy  singleton instance for method chaining.
 	 */
 	public static function create( string $name, string $description = '' ) {
 		self::$instance = new Taxonomy();
