@@ -219,7 +219,7 @@ class CPT {
 	}
 
 	/**
-	 * Sets rewrite arguments.
+	 * Override rewrite arguments.
 	 *
 	 * Optional method for defining the rewrite rules for this custom post type.
 	 *

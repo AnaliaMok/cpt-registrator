@@ -20,7 +20,7 @@ namespace CPT_Registrator\Base;
  */
 class Taxonomy {
 
-    /**
+	/**
 	 * Naming prefix for all upcoming taxonomies.
 	 *
 	 * @var String
@@ -67,20 +67,20 @@ class Taxonomy {
 	 *
 	 * @var CPT
 	 */
-    private static $instance;
+	private static $instance;
 
-    /**
+	/**
 	 * Constructor
 	 *
 	 * Primarily for resetting static members before creating a new custom post type.
 	 */
 	public function __construct() {
-		self::$name        = '';
-		self::$post_key    = '';
-		self::$args        = array();
-    }
+		self::$name     = '';
+		self::$post_key = '';
+		self::$args     = array();
+	}
 
-    /**
+	/**
 	 * Static Constructor.
 	 *
 	 * Creates a new static instance with labels.
@@ -89,14 +89,14 @@ class Taxonomy {
 	 * @param String $description [Default=''].
 	 * @return CPT  singleton instance for method chaining.
 	 */
-    public static function create( string $name, string $description = '' ) {
-        self::$instance = new Taxonomy();
-        self::$name     = $name;
-        self::$instance->set_labels();
-        return self::$instance;
-    }
+	public static function create( string $name, string $description = '' ) {
+		self::$instance = new Taxonomy();
+		self::$name     = $name;
+		self::$instance->set_labels();
+		return self::$instance;
+	}
 
-    /**
+	/**
 	 * Sets a prefix to use for upcoming taxonomy keys.
 	 *
 	 * @param string $prefix Prefix to set.
@@ -113,7 +113,7 @@ class Taxonomy {
 	/**
 	 * Set a post key different from the name.
 	 *
-	 * @param string $post_key
+	 * @param string $post_key Post key to register taxonomy under.
 	 * @return Taxonomy The current instance.
 	 */
 	public function set_post_key( string $post_key ) {
@@ -121,14 +121,14 @@ class Taxonomy {
 		return $this;
 	}
 
-    /**
+	/**
 	 * Sets Taxonomy Labels.
 	 *
 	 * Sets all labels used in admin dashboard.
 	 *
 	 * @return void
 	 */
-    private function set_labels() {
+	private function set_labels() {
         // phpcs:disable
         self::$labels = array(
             'name'                       => _x( self::$name . 's', 'Taxonomy General Name', self::$text_domain ),
@@ -153,58 +153,72 @@ class Taxonomy {
             'items_list_navigation'      => __( self::$name . 's list navigation', self::$text_domain ),
         );
         // phpcs:enable
-    }
+	}
 
 	/**
 	 * Set taxonomy arguments.
 	 *
-	 * @param array $custom_args
+	 * @param array $custom_args Custom arguments used to override defaults.
 	 * @return Taxonomy Current instance.
 	 */
-    public function set_args( $custom_args = array() ) {
-        $new_args = array(
-            'labels'                     => self::$labels,
-            'hierarchical'               => false,
-            'public'                     => true,
-            'show_ui'                    => true,
-            'show_admin_column'          => true,
-            'show_in_nav_menus'          => true,
-            'show_tagcloud'              => false,
+	public function set_args( $custom_args = array() ) {
+		$new_args = array(
+			'labels'            => self::$labels,
+			'hierarchical'      => false,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud'     => false,
 		);
 
-		self::$args = array_replace( self:: $args, $new_args );
+		self::$args = array_replace( self::$args, $new_args );
 
 		if ( ! empty( $custom_args ) ) {
 			self::$args = array_replace( self::$args, $custom_args );
 		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function set_rewrite( $rewrite_args = array() ) {
+	/**
+	 * Override rewrite arguments.
+	 *
+	 * Optional method for defining the rewrite rules for this custom post type.
+	 *
+	 * @param array $rewrite_args Arguments to override defaults with.
+	 * @return Taxonomy Current instance.
+	 */
+	public function set_rewrite( $rewrite_args = array() ) {
 
 		// Slugify name.
 		$slug = str_replace( ' ', '-', strtolower( self::$name ) );
 
-		// Using Wordpress Defaults.
-        $rewrite = array(
-			'slug'			=> $slug,
-			'with_front'	=> true,
-			'hierarchical'  => false,
-			'ep_mask'		=> EP_NONE,
+		// Using WordPress Defaults.
+		$rewrite = array(
+			'slug'         => $slug,
+			'with_front'   => true,
+			'hierarchical' => false,
+			'ep_mask'      => EP_NONE,
 		);
 
 		self::$args['rewrite'] = array_replace( $rewrite, $rewrite_args );
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function register( $post_types = array() ) {
+	/**
+	 * Register taxonomy for supplied list of post types.
+	 *
+	 * @param array $post_types [Default=array('post)] Post types to register this taxonomy under.
+	 * @return Taxonomy Current instance.
+	 */
+	public function register( $post_types = array( 'post' ) ) {
 
 		$tax_qualified_name = '';
 
 		// Set post key.
-		if( ! empty( self::$post_key ) ) {
+		if ( ! empty( self::$post_key ) ) {
 			// Priority given to the explicitly given post key.
 			$tax_qualified_name = self::$post_key;
 		} else {
@@ -226,6 +240,6 @@ class Taxonomy {
 			register_taxonomy_for_object_type( $tax_qualified_name, $pt );
 		}
 
-        return $this;
-    }
+		return $this;
+	}
 }
