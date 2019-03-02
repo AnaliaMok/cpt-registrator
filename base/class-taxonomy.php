@@ -35,6 +35,13 @@ class Taxonomy {
 	private static $name;
 
 	/**
+	 * WordPress compatible post type key to use instead of the name.
+	 *
+	 * @var string
+	 */
+	private static $post_key = '';
+
+	/**
 	 * Text Domain.
 	 *
 	 * @var String
@@ -69,6 +76,7 @@ class Taxonomy {
 	 */
 	public function __construct() {
 		self::$name        = '';
+		self::$post_key    = '';
 		self::$args        = array();
     }
 
@@ -92,7 +100,7 @@ class Taxonomy {
 	 * Sets a prefix to use for upcoming taxonomy keys.
 	 *
 	 * @param string $prefix Prefix to set.
-	 * @return CPT   singleton instance.
+	 * @return Taxonomy   singleton instance.
 	 */
 	public static function set_prefix( string $prefix ) {
 		// Sanitize prefix.
@@ -100,6 +108,17 @@ class Taxonomy {
 
 		self::$prefix = $sanitized_prefix;
 		return self::$instance;
+	}
+
+	/**
+	 * Set a post key different from the name.
+	 *
+	 * @param string $post_key
+	 * @return Taxonomy The current instance.
+	 */
+	public function set_post_key( string $post_key ) {
+		self::$post_key = $post_key;
+		return $this;
 	}
 
     /**
@@ -136,7 +155,7 @@ class Taxonomy {
         // phpcs:enable
     }
 
-    public function set_args( $custom_arg = array() ) {
+    public function set_args( $custom_args = array() ) {
         $new_args = array(
             'labels'                     => self::$labels,
             'hierarchical'               => false,
@@ -145,7 +164,13 @@ class Taxonomy {
             'show_admin_column'          => true,
             'show_in_nav_menus'          => true,
             'show_tagcloud'              => false,
-        );
+		);
+
+		self::$args = array_replace( self:: $args, $new_args );
+
+		if ( ! empty( $custom_args ) ) {
+			self::$args = array_replace( self::$args, $custom_args );
+		}
 
         return $this;
     }
@@ -156,14 +181,23 @@ class Taxonomy {
     }
 
     public function register( $post_types = array() ) {
-        // Sanitize given label name.
-		$tax_qualified_name = strtolower( self::$name );
-		$tax_qualified_name = str_replace( ' ', '_', $tax_qualified_name );
+
+		$tax_qualified_name = '';
+
+		// Set post key.
+		if( ! empty( self::$post_key ) ) {
+			// Priority given to the explicitly given post key.
+			$tax_qualified_name = self::$post_key;
+		} else {
+			// Sanitize given label name.
+			$tax_qualified_name = strtolower( self::$name );
+			$tax_qualified_name = str_replace( ' ', '_', $tax_qualified_name );
+		}
 
 		// Apply any prefixes.
 		if ( ! empty( self::$prefix ) ) {
 			$tax_qualified_name = self::$prefix . $tax_qualified_name;
-        }
+		}
 
         register_taxonomy( $tax_qualified_name, $post_types, self::$args );
         return $this;
