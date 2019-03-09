@@ -13,61 +13,16 @@ namespace CPT_Registrator\Base;
 /**
  * Base Taxonomy Class.
  *
- * @since      1.0.0
+ * This is the base class for creating and registering a new taxonomy.
+ *
+ * @since      0.1.0
  * @package    CPT_Registrator
  * @subpackage Base
  * @author     Analia Mok
  */
 class Taxonomy {
 
-	/**
-	 * Naming prefix for all upcoming taxonomies.
-	 *
-	 * @var String
-	 */
-	private static $prefix = '';
-
-	/**
-	 * Singular version of this CPT's name.
-	 *
-	 * @var String
-	 */
-	private static $name;
-
-	/**
-	 * WordPress compatible post type key to use instead of the name.
-	 *
-	 * @var string
-	 */
-	private static $post_key = '';
-
-	/**
-	 * Text Domain.
-	 *
-	 * @var String
-	 */
-	private static $text_domain = 'cpt_registrator';
-
-	/**
-	 * Taxonomy arguments.
-	 *
-	 * @var Array
-	 */
-	private static $args;
-
-	/**
-	 * All taxonomy labels.
-	 *
-	 * @var Array
-	 */
-	private static $labels;
-
-	/**
-	 * Singleton Instance of the current taxonomy.
-	 *
-	 * @var CPT
-	 */
-	private static $instance;
+	use CanRegister;
 
 	/**
 	 * Constructor
@@ -94,31 +49,6 @@ class Taxonomy {
 		self::$name     = $name;
 		self::$instance->set_labels();
 		return self::$instance;
-	}
-
-	/**
-	 * Sets a prefix to use for upcoming taxonomy keys.
-	 *
-	 * @param string $prefix Prefix to set.
-	 * @return Taxonomy   singleton instance.
-	 */
-	public static function set_prefix( string $prefix ) {
-		// Sanitize prefix.
-		$sanitized_prefix = str_replace( ' ', '_', $prefix );
-
-		self::$prefix = $sanitized_prefix;
-		return self::$instance;
-	}
-
-	/**
-	 * Set a post key different from the name.
-	 *
-	 * @param string $post_key Post key to register taxonomy under.
-	 * @return Taxonomy The current instance.
-	 */
-	public function set_post_key( string $post_key ) {
-		self::$post_key = $post_key;
-		return $this;
 	}
 
 	/**
@@ -177,32 +107,6 @@ class Taxonomy {
 		if ( ! empty( $custom_args ) ) {
 			self::$args = array_replace( self::$args, $custom_args );
 		}
-
-		return $this;
-	}
-
-	/**
-	 * Override rewrite arguments.
-	 *
-	 * Optional method for defining the rewrite rules for this custom post type.
-	 *
-	 * @param array $rewrite_args Arguments to override defaults with.
-	 * @return Taxonomy Current instance.
-	 */
-	public function set_rewrite( $rewrite_args = array() ) {
-
-		// Slugify name.
-		$slug = str_replace( ' ', '-', strtolower( self::$name ) );
-
-		// Using WordPress Defaults.
-		$rewrite = array(
-			'slug'         => $slug,
-			'with_front'   => true,
-			'hierarchical' => false,
-			'ep_mask'      => EP_NONE,
-		);
-
-		self::$args['rewrite'] = array_replace( $rewrite, $rewrite_args );
 
 		return $this;
 	}

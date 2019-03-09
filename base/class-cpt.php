@@ -15,68 +15,14 @@ namespace CPT_Registrator\Base;
  *
  * This is a base class for creating and registering a new custom post type.
  *
- * @since      1.0.0
+ * @since      0.1.0
  * @package    CPT_Registrator
  * @subpackage Base
  * @author     Analia Mok
  */
 class CPT {
 
-	/**
-	 * Naming prefix for all custom post types.
-	 *
-	 * @var String
-	 */
-	private static $prefix = '';
-
-	/**
-	 * Singular version of this CPT's name.
-	 *
-	 * @var String
-	 */
-	private static $name;
-
-	/**
-	 * WordPress compatible post type key to use instead of the name.
-	 *
-	 * @var string
-	 */
-	private static $post_key = '';
-
-	/**
-	 * Text Domain.
-	 *
-	 * @var String
-	 */
-	private static $text_domain = 'cpt_registrator';
-
-	/**
-	 * Post type description.
-	 *
-	 * @var String
-	 */
-	private static $description;
-
-	/**
-	 * Post Type arguments.
-	 *
-	 * @var Array
-	 */
-	private static $args;
-
-	/**
-	 * All post type labels.
-	 *
-	 * @var Array
-	 */
-	private static $labels;
-
-	/**
-	 * Singleton Instance of current post type.
-	 *
-	 * @var CPT
-	 */
-	private static $instance;
+	use CanRegister;
 
 	/**
 	 * Constructor
@@ -108,32 +54,6 @@ class CPT {
 	}
 
 	/**
-	 * Sets a prefix to use for upcoming post type keys.
-	 *
-	 * @param string $prefix Prefix to set.
-	 * @return CPT   singleton instance.
-	 */
-	public static function set_prefix( string $prefix ) {
-
-		// Sanitize prefix.
-		$sanitized_prefix = str_replace( ' ', '_', $prefix );
-
-		self::$prefix = $sanitized_prefix;
-		return self::$instance;
-	}
-
-	/**
-	 * Set a post key different from the name.
-	 *
-	 * @param string $post_key
-	 * @return Taxonomy The current instance.
-	 */
-	public function set_post_key( string $post_key ) {
-		self::$post_key = $post_key;
-		return $this;
-	}
-
-	/**
 	 * Sets CPT Labels.
 	 *
 	 * Sets all labels used in admin dashboard.
@@ -142,6 +62,7 @@ class CPT {
 	 */
 	private function set_labels() {
 		// phpcs:disable
+		// FIXME: Want to follow WordPress's I18N standards.
 		self::$labels = array(
 			'name'                  => _x( self::$name, 'Post Type General Name', self::$text_domain ),
 			'singular_name'         => _x( self::$name, 'Post Type Singular Name', self::$text_domain ),
@@ -218,30 +139,9 @@ class CPT {
 		return $this;
 	}
 
-	/**
-	 * Override rewrite arguments.
-	 *
-	 * Optional method for defining the rewrite rules for this custom post type.
-	 *
-	 * @param String $slug Proper slug to use for this post type.
-	 * @return CPT   singleton instance.
-	 */
-	public function set_rewrite( $rewrite_args = array() ) {
-		// Slugify name.
-		$slug = str_replace( ' ', '-', strtolower( self::$name ) );
-
-		// Using Wordpress Defaults.
-        $rewrite = array(
-			'slug'			=> $slug,
-			'with_front'	=> true,
-			'hierarchical'  => false,
-			'ep_mask'		=> EP_NONE,
-		);
-
-		self::$args['rewrite'] = array_replace( $rewrite, $rewrite_args );
-
-        return $this;
-    }
+	public function make_restful( $rest_base='', $rest_controller_class = '' ) {
+		// TODO
+	}
 
 	/**
 	 * Register post type with WordPress.
