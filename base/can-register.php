@@ -73,7 +73,7 @@ trait CanRegister {
 	/**
 	 * Singleton Instance.
 	 *
-	 * @var Object 	The current registration class.
+	 * @var Object  The current registration class.
 	 */
 	private static $instance;
 
@@ -94,7 +94,7 @@ trait CanRegister {
 	/**
 	 * Set a post key different from the name.
 	 *
-	 * @param string $post_key
+	 * @param string $post_key Post key to use during registration.
 	 * @return Object The current instance.
 	 */
 	public function set_post_key( string $post_key ) {
@@ -107,19 +107,19 @@ trait CanRegister {
 	 *
 	 * Optional method for defining the rewrite rules for this custom post type.
 	 *
-	 * @param String $slug Proper slug to use for this post type.
+	 * @param Array $rewrite_args Array arguments to override default rewrite rules.
 	 * @return Object   Current singleton instance.
 	 */
 	public function set_rewrite( $rewrite_args = array() ) {
 		// Slugify name.
 		$slug = str_replace( ' ', '-', strtolower( self::$name ) );
 
-		// Using Wordpress Defaults.
-        $rewrite = array(
-			'slug'			=> $slug,
-			'with_front'	=> true,
-			'hierarchical'  => false,
-			'ep_mask'		=> EP_NONE,
+		// Using WordPress Defaults.
+		$rewrite = array(
+			'slug'         => $slug,
+			'with_front'   => true,
+			'hierarchical' => false,
+			'ep_mask'      => EP_NONE,
 		);
 
 		self::$args['rewrite'] = array_replace( $rewrite, $rewrite_args );
@@ -130,16 +130,17 @@ trait CanRegister {
 	/**
 	 * Configures this class for the REST API.
 	 *
-	 * @param string $rest_base
-	 * @param string $rest_controller_class
+	 * @param string $rest_base Base url used in REST API.
+	 * @param string $rest_controller_class [Default=WP_REST_Posts_Controller if CPT, WP_REST_Terms_Controller if Taxonomy]
+	 *                                      Name of controller to handle RESTful requests.
 	 * @return CPT singleton instance.
 	 */
-	public function make_restful( $rest_base='', $rest_controller_class = '' ) {
+	public function make_restful( $rest_base = '', $rest_controller_class = '' ) {
 		$rest_args = array(
-			'show_in_rest'	=> true,
+			'show_in_rest' => true,
 		);
 
-		if( ! empty( $rest_base ) ) {
+		if ( ! empty( $rest_base ) ) {
 			$rest_args['rest_base'] = $rest_base;
 		}
 

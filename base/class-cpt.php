@@ -150,7 +150,7 @@ class CPT {
 	public function register() {
 		$cpt_qualified_name = '';
 
-		if( ! empty( self::$post_key ) ) {
+		if ( ! empty( self::$post_key ) ) {
 			$cpt_qualified_name = self::$post_key;
 		} else {
 			// Sanitize given label name.
