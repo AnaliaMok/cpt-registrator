@@ -139,10 +139,6 @@ class CPT {
 		return $this;
 	}
 
-	public function make_restful( $rest_base='', $rest_controller_class = '' ) {
-		// TODO
-	}
-
 	/**
 	 * Register post type with WordPress.
 	 *

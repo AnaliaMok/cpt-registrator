@@ -126,4 +126,28 @@ trait CanRegister {
 
 		return $this;
 	}
+
+	/**
+	 * Configures this class for the REST API.
+	 *
+	 * @param string $rest_base
+	 * @param string $rest_controller_class
+	 * @return CPT singleton instance.
+	 */
+	public function make_restful( $rest_base='', $rest_controller_class = '' ) {
+		$rest_args = array(
+			'show_in_rest'	=> true,
+		);
+
+		if( ! empty( $rest_base ) ) {
+			$rest_args['rest_base'] = $rest_base;
+		}
+
+		if ( ! empty( $rest_controller_class ) ) {
+			$rest_args['rest_controller_class'] = $rest_controller_class;
+		}
+
+		self::$args = array_merge( self::$args, $rest_args );
+		return $this;
+	}
 }
