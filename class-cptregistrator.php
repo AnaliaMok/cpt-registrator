@@ -47,11 +47,8 @@ class CPTRegistrator {
 	 * @return void
 	 */
 	public static function load() {
-		// Loads all necessary files.
-		require_once plugin_dir_path( __FILE__ ) . 'helpers/class-dashicons.php';
-		require_once plugin_dir_path( __FILE__ ) . 'base/can-register.php';
-		require_once plugin_dir_path( __FILE__ ) . 'base/class-cpt.php';
-		require_once plugin_dir_path( __FILE__ ) . 'base/class-taxonomy.php';
+		// Register autoloader.
+		\spl_autoload_register( array( CPTRegistrator::class, 'autoload' ) );
 	}
 
 	/**
@@ -60,9 +57,26 @@ class CPTRegistrator {
 	 * @since 0.2.0
 	 * @return void
 	 */
-	public static function autoload() {
-		$base_classes_dir   = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR;
-		$helper_classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'helper' . DIRECTORY_SEPARATOR;
-		// TODO.
+	public static function autoload( $class_name ) {
+
+		$last_slash = strrpos( $class_name, '\\' );
+		$short_class_name = substr( $class_name, $last_slash + 1 );
+
+		if ( false !== strpos( $class_name, 'Base' ) ) {
+			$base_classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR;
+
+			if ( false !== strpos( $class_name, 'CanRegister') ) {
+				// Requiring trait.
+				require_once $base_classes_dir . strtolower( $short_class_name ) . '.php';
+			} else {
+				// Requiring class.
+				require_once $base_classes_dir . 'class-' . strtolower( $short_class_name ) . '.php';
+			}
+
+		} else {
+			// Helper Classes.
+			$helper_classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'helper' . DIRECTORY_SEPARATOR;
+			require_once $helper_classes_dir . 'class-' . strtolower( $short_class_name ) . '.php';
+		}
 	}
 }
