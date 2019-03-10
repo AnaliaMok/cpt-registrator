@@ -61,37 +61,61 @@ class CPT {
 	 * @return void
 	 */
 	private function set_labels() {
-		// phpcs:disable
-		// FIXME: Want to follow WordPress's I18N standards.
+
+		$substituted_name_label     = $this->get_singular_name_i18n( 'Post Type General Name' );
+		$substituted_singular_label = $this->get_singular_name_i18n( 'Post Type Singular Name' );
+
 		self::$labels = array(
-			'name'                  => _x( self::$name, 'Post Type General Name', self::$text_domain ),
-			'singular_name'         => _x( self::$name, 'Post Type Singular Name', self::$text_domain ),
-			'menu_name'             => __( self::$name . 's', self::$text_domain ),
-			'name_admin_bar'        => __( self::$name, self::$text_domain ),
-			'archives'              => __( self::$name . ' Archives', self::$text_domain ),
-			'attributes'            => __( self::$name . ' Attributes', self::$text_domain ),
-			'all_items'             => __( 'All ' . self::$name . 's', self::$text_domain ),
-			'add_new_item'          => __( 'Add New ' . self::$name, self::$text_domain ),
-			'add_new'               => __( 'Add New ' . self::$name, self::$text_domain ),
-			'new_item'              => __( 'New ' . self::$name, self::$text_domain ),
-			'edit_item'             => __( 'Edit ' . self::$name, self::$text_domain ),
-			'update_item'           => __( 'Update ' . self::$name, self::$text_domain ),
-			'view_item'             => __( 'View ' . self::$name, self::$text_domain ),
-			'view_items'            => __( 'View ' . self::$name . 's', self::$text_domain ),
-			'search_items'          => __( 'Search ' . self::$name . 's', self::$text_domain ),
-			'not_found'             => __( 'Not found', self::$text_domain ),
-			'not_found_in_trash'    => __( 'Not found in Trash', self::$text_domain ),
-			'featured_image'        => __( 'Featured Image', self::$text_domain ),
-			'set_featured_image'    => __( 'Set featured image', self::$text_domain ),
-			'remove_featured_image' => __( 'Remove featured image', self::$text_domain ),
-			'use_featured_image'    => __( 'Use as featured image', self::$text_domain ),
-			'insert_into_item'      => __( 'Insert into ' . self::$name, self::$text_domain ),
-			'uploaded_to_this_item' => __( 'Uploaded to this ' . self::$name, self::$text_domain ),
-			'items_list'            => __( 'Items list', self::$text_domain ),
-			'items_list_navigation' => __( 'Items list navigation', self::$text_domain ),
-			'filter_items_list'     => __( 'Filter ' . self::$name . ' list', self::$text_domain ),
+			'name'                  => $substituted_name_label,
+			'singular_name'         => $substituted_singular_label,
+			/* translators: %s Term name followed by text domain. */
+			'menu_name'             => sprintf( __( '%ss', '%s' ), self::$name, self::$text_domain ),
+			'name_admin_bar'        => $substituted_name_label,
+			/* translators: %s Term name followed by text domain. */
+			'archives'              => sprintf( __( '%s Archives', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'attributes'            => sprintf( __( '%s Attributes', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'all_items'             => sprintf( __( 'All %ss', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'add_new_item'          => sprintf( __( 'Add New %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'add_new'               => sprintf( __( 'Add New %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'new_item'              => sprintf( __( 'New %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'edit_item'             => sprintf( __( 'Edit %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'update_item'           => sprintf( __( 'Update %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'view_item'             => sprintf( __( 'View %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'view_items'            => sprintf( __( 'View %ss', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'search_items'          => sprintf( __( 'Search %ss', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'not_found'             => sprintf( __( 'Not found', '%s' ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'not_found_in_trash'    => sprintf( __( 'Not found in Trash', '%s' ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'featured_image'        => sprintf( __( 'Featured Image', '%s' ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'set_featured_image'    => sprintf( __( 'Set featured image', '%s' ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'remove_featured_image' => sprintf( __( 'Remove featured image', '%s' ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'use_featured_image'    => sprintf( __( 'Use as featured image', '%s' ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'insert_into_item'      => sprintf( __( 'Insert into %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'uploaded_to_this_item' => sprintf( __( 'Uploaded to this %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'items_list'            => sprintf( __( 'Items list', '%s' ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'items_list_navigation' => sprintf( __( 'Items list navigation', '%s' ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'filter_items_list'     => sprintf( __( 'Filter %s list', '%s' ), self::$name, self::$text_domain ),
 		);
-		// phpcs:enable
 	}
 
 	/**

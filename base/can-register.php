@@ -105,11 +105,12 @@ trait CanRegister {
 	/**
 	 * Helper method for getting around translating strings containing only a placeholder.
 	 *
+	 * @param String $context Translation context.
 	 * @return String translated singular name label.
 	 */
-	public static function get_singular_name_i18n() {
+	public static function get_singular_name_i18n( $context ) {
 		/* translators: %s Term name followed by text domain. */
-		$substituted_singular_label = sprintf( _x( '<span>%s</span>', 'Taxonomy Singular Name', '%s' ), self::$name, self::$text_domain );
+		$substituted_singular_label = sprintf( _x( '<span>%s</span>', '%s', '%s' ), self::$name, $context, self::$text_domain );
 		$substituted_singular_label = str_replace( '<span>', '', $substituted_singular_label );
 		$substituted_singular_label = str_replace( '</span>', '', $substituted_singular_label );
 		return $substituted_singular_label;
