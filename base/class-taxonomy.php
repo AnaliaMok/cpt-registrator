@@ -59,30 +59,53 @@ class Taxonomy {
 	 * @return void
 	 */
 	private function set_labels() {
-        // phpcs:disable
-        self::$labels = array(
-            'name'                       => _x( self::$name . 's', 'Taxonomy General Name', self::$text_domain ),
-            'singular_name'              => _x( self::$name, 'Taxonomy Singular Name', self::$text_domain ),
-            'menu_name'                  => __( self::$name, self::$text_domain ),
-            'all_items'                  => __( 'All ' . self::$name . 's', self::$text_domain ),
-            'parent_item'                => __( 'Parent ' . self::$name, self::$text_domain ),
-            'parent_item_colon'          => __( 'Parent ' . self::$name . ':', self::$text_domain ),
-            'new_item_name'              => __( 'New ' . self::$name, self::$text_domain ),
-            'add_new_item'               => __( 'Add New ' . self::$name, self::$text_domain ),
-            'edit_item'                  => __( 'Edit ' . self::$name, self::$text_domain ),
-            'update_item'                => __( 'Update ' . self::$name, self::$text_domain ),
-            'view_item'                  => __( 'View ' . self::$name, self::$text_domain ),
-            'separate_items_with_commas' => __( 'Separate items with commas', self::$text_domain ),
-            'add_or_remove_items'        => __( 'Add or remove ' . strtolower( self::$name ) . 's', self::$text_domain ),
-            'choose_from_most_used'      => __( 'Choose from the most used', self::$text_domain ),
-            'popular_items'              => __( 'Popular ' . self::$name . 's', self::$text_domain ),
-            'search_items'               => __( 'Search ' . self::$name . 's', self::$text_domain ),
-            'not_found'                  => __( 'Not Found', self::$text_domain ),
-            'no_terms'                   => __( 'No ' . self::$name . 's', self::$text_domain ),
-            'items_list'                 => __( self::$name . 's list', self::$text_domain ),
-            'items_list_navigation'      => __( self::$name . 's list navigation', self::$text_domain ),
-        );
-        // phpcs:enable
+
+		/* translators: %s Term name followed by text domain. */
+		$substituted_singular_label = sprintf( _x( '<span>%s</span>', 'Taxonomy Singular Name', '%s' ), self::$name, self::$text_domain );
+		$substituted_singular_label = str_replace( '<span>', '', $substituted_singular_label );
+		$substituted_singular_label = str_replace( '</span>', '', $substituted_singular_label );
+
+		self::$labels = array(
+			/* translators: %s Term name followed by text domain. */
+			'name'                       => sprintf( _x( '%ss', 'Taxonomy General Name', '%s' ), self::$name, self::$text_domain ),
+			'singular_name'              => $substituted_singular_label,
+			'menu_name'                  => $substituted_singular_label,
+			/* translators: %s Term name followed by text domain. */
+			'all_items'                  => sprintf( __( 'All %ss', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'parent_item'                => sprintf( __( 'Parent %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'parent_item_colon'          => sprintf( __( 'Parent %s:', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'new_item_name'              => sprintf( __( 'New %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'add_new_item'               => sprintf( __( 'Add New %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'edit_item'                  => sprintf( __( 'Edit %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'update_item'                => sprintf( __( 'Update %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'view_item'                  => sprintf( __( 'View %s', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'separate_items_with_commas' => sprintf( __( 'Separate items with commas', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'add_or_remove_items'        => sprintf( __( 'Add or remove %ss', '%s' ), strtolower( self::$name ), self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'choose_from_most_used'      => sprintf( __( 'Choose from the most used', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'popular_items'              => sprintf( __( 'Popular %ss', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'search_items'               => sprintf( __( 'Search %ss', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'not_found'                  => sprintf( __( 'Not Found', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'no_terms'                   => sprintf( __( 'No %ss', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'items_list'                 => sprintf( __( '%ss list', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+			'items_list_navigation'      => sprintf( __( '%ss list navigation', '%s' ), self::$name, self::$text_domain ),
+			/* translators: %s Term name followed by text domain. */
+		);
 	}
 
 	/**

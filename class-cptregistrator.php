@@ -40,6 +40,21 @@ class CPTRegistrator {
 	}
 
 	/**
+	 * Requires all necessary classes.
+	 *
+	 * Temporary method to consolidate requires before an autoloader is implemented.
+	 *
+	 * @return void
+	 */
+	public static function load() {
+		// Loads all necessary files.
+		require_once plugin_dir_path( __FILE__ ) . 'helpers/class-dashicons.php';
+		require_once plugin_dir_path( __FILE__ ) . 'base/can-register.php';
+		require_once plugin_dir_path( __FILE__ ) . 'base/class-cpt.php';
+		require_once plugin_dir_path( __FILE__ ) . 'base/class-taxonomy.php';
+	}
+
+	/**
 	 * Autoload function for registering all classes.
 	 *
 	 * @since 0.2.0
