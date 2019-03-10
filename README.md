@@ -17,6 +17,6 @@ Learn more on how to use this framework in the [wiki](https://github.com/AnaliaM
 - [x] Create base class for **defining** a custom post type
 - [x] Create a base class for defining taxonomies (Need to document)
 - [x] Implement single file method for defining all cpts in a site. (Need to document)
-- [ ] Create class autoloader
+- [x] Create class autoloader
 - [ ] (**Reach Goal**) Add ability to define a "parent" CPT. This parent will act as a top level menu item which will then direct to a dashboard-like admin page. The page will be used to then display all child CPT records.
 - [ ] (**Reach Goal**) Add extension for use with ACF and CMB2
