@@ -60,10 +60,7 @@ class Taxonomy {
 	 */
 	private function set_labels() {
 
-		/* translators: %s Term name followed by text domain. */
-		$substituted_singular_label = sprintf( _x( '<span>%s</span>', 'Taxonomy Singular Name', '%s' ), self::$name, self::$text_domain );
-		$substituted_singular_label = str_replace( '<span>', '', $substituted_singular_label );
-		$substituted_singular_label = str_replace( '</span>', '', $substituted_singular_label );
+		$substituted_singular_label = $this->get_singular_name_i18n();
 
 		self::$labels = array(
 			/* translators: %s Term name followed by text domain. */
