@@ -48,31 +48,31 @@ class CPTRegistrator {
 	 */
 	public static function load() {
 		// Register autoloader.
-		\spl_autoload_register( array( CPTRegistrator::class, 'autoload' ) );
+		\spl_autoload_register( array( self::class, 'autoload' ) );
 	}
 
 	/**
 	 * Autoload function for registering all classes.
 	 *
 	 * @since 0.2.0
+	 * @param String $class_name Fully qualified name of the unrequired class.
 	 * @return void
 	 */
 	public static function autoload( $class_name ) {
 
-		$last_slash = strrpos( $class_name, '\\' );
+		$last_slash       = strrpos( $class_name, '\\' );
 		$short_class_name = substr( $class_name, $last_slash + 1 );
 
 		if ( false !== strpos( $class_name, 'Base' ) ) {
 			$base_classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR;
 
-			if ( false !== strpos( $class_name, 'CanRegister') ) {
+			if ( false !== strpos( $class_name, 'CanRegister' ) ) {
 				// Requiring trait.
 				require_once $base_classes_dir . strtolower( $short_class_name ) . '.php';
 			} else {
 				// Requiring class.
 				require_once $base_classes_dir . 'class-' . strtolower( $short_class_name ) . '.php';
 			}
-
 		} else {
 			// Helper Classes.
 			$helper_classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'helper' . DIRECTORY_SEPARATOR;
