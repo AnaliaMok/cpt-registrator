@@ -56,7 +56,7 @@ class CPTRegistrator {
 	 *
 	 * @since 0.2.0
 	 * @param String $class_name Fully qualified name of the unrequired class.
-	 * @return void
+	 * @return void|boolean Nothing on success; false if class doesn't belong to this package.
 	 */
 	public static function autoload( $class_name ) {
 		
