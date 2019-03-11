@@ -128,9 +128,11 @@ class CPT {
 	 * @return CPT singleton instance.
 	 */
 	public function set_args( $dashicon = 'dashicons-admin-post', $custom_args = array() ) {
-		// phpcs:disable
+
+		$substituted_singular_label = $this->get_singular_name_i18n( 'Post Type Singular Name' );
+
 		$new_args = array(
-			'label'               => __( self::$name, self::$text_domain ),
+			'label'               => $substituted_singular_label,
 			'labels'              => self::$labels,
 			'hierarchical'        => false, // FUTURE TODO: Dynamically set.
 			'public'              => true,
@@ -146,7 +148,7 @@ class CPT {
 			'capability_type'     => 'post',
 			'supports'            => array( 'title', 'editor' ),
 		);
-		// phpcs:enable
+
 		self::$args = array_replace( self::$args, $new_args );
 
 		if ( ! empty( $custom_args ) ) {
@@ -155,9 +157,11 @@ class CPT {
 
 		// Set Customizable values.
 		if ( ! empty( self::$description ) ) {
-			// phpcs:disable
-			self::$args['description'] = __( self::$description, self::$text_domain );
-			// phpcs:enable
+			/* translators: %s Term name followed by text domain. */
+			$description               = sprintf( __( '<span>%s</span>', '%s' ), self::$description, self::$text_domain );
+			$description               = str_replace( '<span>', '', $description );
+			$description               = str_replace( '</span>', '', $description );
+			self::$args['description'] = $description;
 		}
 
 		return $this;
