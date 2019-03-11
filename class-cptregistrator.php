@@ -59,6 +59,11 @@ class CPTRegistrator {
 	 * @return void
 	 */
 	public static function autoload( $class_name ) {
+		
+		// Make sure to not interfere with other autoloaders.
+		if ( false === strpos( $class_name, 'CPT_Registrator' ) ) {
+			return false;
+		}
 
 		$last_slash       = strrpos( $class_name, '\\' );
 		$short_class_name = substr( $class_name, $last_slash + 1 );
