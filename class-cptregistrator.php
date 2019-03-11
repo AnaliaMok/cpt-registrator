@@ -56,9 +56,14 @@ class CPTRegistrator {
 	 *
 	 * @since 0.2.0
 	 * @param String $class_name Fully qualified name of the unrequired class.
-	 * @return void
+	 * @return void|boolean Nothing on success; false if class doesn't belong to this package.
 	 */
 	public static function autoload( $class_name ) {
+		
+		// Make sure to not interfere with other autoloaders.
+		if ( false === strpos( $class_name, 'CPT_Registrator' ) ) {
+			return false;
+		}
 
 		$last_slash       = strrpos( $class_name, '\\' );
 		$short_class_name = substr( $class_name, $last_slash + 1 );
