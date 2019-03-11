@@ -59,7 +59,7 @@ class CPTRegistrator {
 	 * @return void|boolean Nothing on success; false if class doesn't belong to this package.
 	 */
 	public static function autoload( $class_name ) {
-		
+
 		// Make sure to not interfere with other autoloaders.
 		if ( false === strpos( $class_name, 'CPT_Registrator' ) ) {
 			return false;
