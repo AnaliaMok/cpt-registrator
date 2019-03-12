@@ -36,6 +36,13 @@ trait CanRegister {
 	private static $name;
 
 	/**
+	 * Plural version of this class's name.
+	 *
+	 * @var String
+	 */
+	private static $plural_name;
+
+	/**
 	 * WordPress compatible post type key to use instead of the name.
 	 *
 	 * @var String
