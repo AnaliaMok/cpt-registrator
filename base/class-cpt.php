@@ -185,10 +185,11 @@ class CPT {
 			$cpt_qualified_name = strtolower( self::$name );
 			$cpt_qualified_name = str_replace( ' ', '_', $cpt_qualified_name );
 
-			// Apply any prefixes.
-			if ( ! empty( self::$prefix ) ) {
-				$cpt_qualified_name = self::$prefix . $cpt_qualified_name;
-			}
+		}
+
+		// Apply any prefixes.
+		if ( ! empty( self::$prefix ) ) {
+			$cpt_qualified_name = self::$prefix . $cpt_qualified_name;
 		}
 
 		// Register Custom Post Type.
