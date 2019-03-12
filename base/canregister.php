@@ -108,9 +108,16 @@ trait CanRegister {
 	 * @param String $context Translation context.
 	 * @return String translated singular name label.
 	 */
-	public static function get_singular_name_i18n( $context ) {
-		/* translators: %s Term name followed by text domain. */
-		$substituted_singular_label = sprintf( _x( '<span>%s</span>', '%s', '%s' ), self::$name, $context, self::$text_domain );
+	public static function get_singular_name_i18n( $context = '' ) {
+
+		if ( ! empty( $context ) ) {
+			/* translators: %s Term name followed by text domain. */
+			$substituted_singular_label = sprintf( _x( '<span>%s</span>', '%s', '%s' ), self::$name, $context, self::$text_domain );
+		} else {
+			/* translators: %s Term name followed by text domain. */
+			$substituted_singular_label = sprintf( __( '<span>%s</span>', '%s' ), self::$name, self::$text_domain );
+		}
+
 		$substituted_singular_label = str_replace( '<span>', '', $substituted_singular_label );
 		$substituted_singular_label = str_replace( '</span>', '', $substituted_singular_label );
 		return $substituted_singular_label;
