@@ -184,7 +184,6 @@ class CPT {
 			// Sanitize given label name.
 			$cpt_qualified_name = strtolower( self::$name );
 			$cpt_qualified_name = str_replace( ' ', '_', $cpt_qualified_name );
-
 		}
 
 		// Apply any prefixes.

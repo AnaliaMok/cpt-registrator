@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:       CPT Registrator
  * Description:       Plugin framework for auto-registering and defining custom post types.
- * Version:           0.1.0
+ * Version:           0.2.3
  * Author:            Analia Mok
  * Author URI:        https://analiamok.netlify.com
  * Requires PHP:      7.0
