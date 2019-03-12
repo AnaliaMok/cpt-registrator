@@ -2,13 +2,15 @@
 /**
  * The file that defines the base custom post type class.
  *
- * @since      1.0.0
+ * @since      0.2.3
  *
  * @package    CPT_Registrator
  * @subpackage Base
  */
 
 namespace CPT_Registrator\Base;
+
+use CPT_Registrator\Base\Inflect;
 
 /**
  * Base Custom Post Type class.
@@ -48,6 +50,7 @@ class CPT {
 	public static function create( string $name, string $description = '' ) {
 		self::$instance    = new CPT();
 		self::$name        = $name;
+		self::$plural_name = Inflect::pluralize( $name );
 		self::$description = $description;
 		self::$instance->set_labels();
 		return self::$instance;
@@ -69,14 +72,14 @@ class CPT {
 			'name'                  => $substituted_name_label,
 			'singular_name'         => $substituted_singular_label,
 			/* translators: %s Term name followed by text domain. */
-			'menu_name'             => sprintf( __( '%ss', '%s' ), self::$name, self::$text_domain ),
+			'menu_name'             => sprintf( __( '%s', '%s' ), self::$plural_name, self::$text_domain ),
 			'name_admin_bar'        => $substituted_name_label,
 			/* translators: %s Term name followed by text domain. */
 			'archives'              => sprintf( __( '%s Archives', '%s' ), self::$name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
 			'attributes'            => sprintf( __( '%s Attributes', '%s' ), self::$name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'all_items'             => sprintf( __( 'All %ss', '%s' ), self::$name, self::$text_domain ),
+			'all_items'             => sprintf( __( 'All %s', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
 			'add_new_item'          => sprintf( __( 'Add New %s', '%s' ), self::$name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
@@ -90,9 +93,9 @@ class CPT {
 			/* translators: %s Term name followed by text domain. */
 			'view_item'             => sprintf( __( 'View %s', '%s' ), self::$name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'view_items'            => sprintf( __( 'View %ss', '%s' ), self::$name, self::$text_domain ),
+			'view_items'            => sprintf( __( 'View %s', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'search_items'          => sprintf( __( 'Search %ss', '%s' ), self::$name, self::$text_domain ),
+			'search_items'          => sprintf( __( 'Search %s', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
 			'not_found'             => sprintf( __( 'Not found', '%s' ), self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
@@ -184,11 +187,11 @@ class CPT {
 			// Sanitize given label name.
 			$cpt_qualified_name = strtolower( self::$name );
 			$cpt_qualified_name = str_replace( ' ', '_', $cpt_qualified_name );
+		}
 
-			// Apply any prefixes.
-			if ( ! empty( self::$prefix ) ) {
-				$cpt_qualified_name = self::$prefix . $cpt_qualified_name;
-			}
+		// Apply any prefixes.
+		if ( ! empty( self::$prefix ) ) {
+			$cpt_qualified_name = self::$prefix . $cpt_qualified_name;
 		}
 
 		// Register Custom Post Type.

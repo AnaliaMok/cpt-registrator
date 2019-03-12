@@ -2,7 +2,7 @@
 /**
  * The file that defines the base registration trait.
  *
- * @since      1.0.0
+ * @since      0.2.0
  *
  * @package    CPT_Registrator
  * @subpackage Base
@@ -14,7 +14,7 @@ namespace CPT_Registrator\Base;
  * Trait defining the base methods for defining a custom data type
  * in WordPress.
  *
- * @since      0.1.0
+ * @since      0.2.0
  * @package    CPT_Registrator
  * @subpackage Base
  * @author     Analia Mok
@@ -34,6 +34,13 @@ trait CanRegister {
 	 * @var String
 	 */
 	private static $name;
+
+	/**
+	 * Plural version of this class's name.
+	 *
+	 * @var String
+	 */
+	private static $plural_name;
 
 	/**
 	 * WordPress compatible post type key to use instead of the name.

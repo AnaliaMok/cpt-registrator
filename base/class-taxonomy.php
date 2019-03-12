@@ -2,7 +2,7 @@
 /**
  * The file that defines the base custom post type class.
  *
- * @since      1.0.0
+ * @since      0.2.0
  *
  * @package    CPT_Registrator
  * @subpackage Base
@@ -15,7 +15,7 @@ namespace CPT_Registrator\Base;
  *
  * This is the base class for creating and registering a new taxonomy.
  *
- * @since      0.1.0
+ * @since      0.2.0
  * @package    CPT_Registrator
  * @subpackage Base
  * @author     Analia Mok
@@ -68,7 +68,7 @@ class Taxonomy {
 			'singular_name'              => $substituted_singular_label,
 			'menu_name'                  => $substituted_singular_label,
 			/* translators: %s Term name followed by text domain. */
-			'all_items'                  => sprintf( __( 'All %ss', '%s' ), self::$name, self::$text_domain ),
+			'all_items'                  => sprintf( __( 'All %s', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
 			'parent_item'                => sprintf( __( 'Parent %s', '%s' ), self::$name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
@@ -86,21 +86,21 @@ class Taxonomy {
 			/* translators: %s Term name followed by text domain. */
 			'separate_items_with_commas' => sprintf( __( 'Separate items with commas', '%s' ), self::$name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'add_or_remove_items'        => sprintf( __( 'Add or remove %ss', '%s' ), strtolower( self::$name ), self::$text_domain ),
+			'add_or_remove_items'        => sprintf( __( 'Add or remove %s', '%s' ), strtolower( self::$name ), self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
 			'choose_from_most_used'      => sprintf( __( 'Choose from the most used', '%s' ), self::$name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'popular_items'              => sprintf( __( 'Popular %ss', '%s' ), self::$name, self::$text_domain ),
+			'popular_items'              => sprintf( __( 'Popular %s', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'search_items'               => sprintf( __( 'Search %ss', '%s' ), self::$name, self::$text_domain ),
+			'search_items'               => sprintf( __( 'Search %s', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
 			'not_found'                  => sprintf( __( 'Not Found', '%s' ), self::$name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'no_terms'                   => sprintf( __( 'No %ss', '%s' ), self::$name, self::$text_domain ),
+			'no_terms'                   => sprintf( __( 'No %s', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'items_list'                 => sprintf( __( '%ss list', '%s' ), self::$name, self::$text_domain ),
+			'items_list'                 => sprintf( __( '%s list', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
-			'items_list_navigation'      => sprintf( __( '%ss list navigation', '%s' ), self::$name, self::$text_domain ),
+			'items_list_navigation'      => sprintf( __( '%s list navigation', '%s' ), self::$plural_name, self::$text_domain ),
 			/* translators: %s Term name followed by text domain. */
 		);
 	}
