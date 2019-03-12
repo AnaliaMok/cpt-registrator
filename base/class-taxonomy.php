@@ -2,7 +2,7 @@
 /**
  * The file that defines the base custom post type class.
  *
- * @since      1.0.0
+ * @since      0.2.0
  *
  * @package    CPT_Registrator
  * @subpackage Base
@@ -15,7 +15,7 @@ namespace CPT_Registrator\Base;
  *
  * This is the base class for creating and registering a new taxonomy.
  *
- * @since      0.1.0
+ * @since      0.2.0
  * @package    CPT_Registrator
  * @subpackage Base
  * @author     Analia Mok

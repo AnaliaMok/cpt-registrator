@@ -2,7 +2,7 @@
 /**
  * The file that defines the base custom post type class.
  *
- * @since      1.0.0
+ * @since      0.2.3
  *
  * @package    CPT_Registrator
  * @subpackage Base
