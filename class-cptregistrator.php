@@ -80,7 +80,7 @@ class CPTRegistrator {
 			}
 		} else {
 			// Helper Classes.
-			$helper_classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'helper' . DIRECTORY_SEPARATOR;
+			$helper_classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR;
 			require_once $helper_classes_dir . 'class-' . strtolower( $short_class_name ) . '.php';
 		}
 	}
